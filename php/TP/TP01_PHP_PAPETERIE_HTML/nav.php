@@ -9,8 +9,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Les Produits</a>
                             <div class="dropdown-menu bg-secondary">
-                                <a class="dropdown-item" href="prod_papeterie.php">Papeterie</a>
-                                <a class="dropdown-item" href="prod_ecriture.php">Ecriture</a>
+                                <a class="dropdown-item" href="prod_papeterie.php"<?php if($page==prod_papeterie){syle='display=none"}?>>Papeterie</a>
+                                <a class="dropdown-item" href="prod_ecriture.php"<?php if($page==prod_ecriture){syle='display=none"}?>>P>Ecriture</a>
                                 <a class="dropdown-item" href="#">Accessoires</a>
                             </div>
                         </li>
