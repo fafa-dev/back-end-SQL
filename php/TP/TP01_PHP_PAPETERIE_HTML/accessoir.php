@@ -1,7 +1,8 @@
 <?php
-$page = 'prod_ecriture';
-
+   $page = 'prod_acces';
 ?>
+
+
 
 <!DOCTYPE html>
 
@@ -25,9 +26,9 @@ $page = 'prod_ecriture';
             require_once 'entete.php';
             require_once 'nav.php';
             ?>
-          
-            <main class="container">
-                <h2>Liste des produits de la catégorie écriture</h2>
+
+<main class="container">
+<h2>Liste des produits de la catégorie écriture</h2>
                 <table class="table table-bordered">
                     <tbody id="ligne">
                         <tr>
@@ -60,15 +61,14 @@ $page = 'prod_ecriture';
                         </tr>
                     </tbody>
                 </table>
-            </main>   
 
+                    <img src="OIP.jpg" alt=""  >
 
-</div>
-            
-            <?php
+</main>
+        </div>
+        
+<?php
             require_once 'footer.php';
         ?>
     </body>
 </html>
-
-       

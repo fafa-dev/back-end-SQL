@@ -16,7 +16,7 @@
     <?php 
         $page = 'home.php';
         include 'inc/entete.php';
-        include ''
+        
     ?>
 
 
