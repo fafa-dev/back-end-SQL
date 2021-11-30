@@ -29,26 +29,69 @@
 
             <main class="container">
 
-            <?php //balise php qui va conroler le mdp et le login ainsi que la methode utiliser (post get) dy formulaire
+            <?php //balise php qui va conroler le mdp et le login ainsi que la methode utiliser (post get) du formulaire
 
                 if($_SERVER['REQUEST_METHOD']== 'POST'){  //condition pour savoir si on passe par la methode post
                 session_start();
 
-                $login= $_POST['login'];
+                $refPdo = new PDO('mysql:host=localhost;dbname=papeterie;charset=utf8', 'root','');
 
-                $pass = $_POST['mdp'];
-                if ($pass =='psw'){
-                $_SESSION['user'] = $login;
-                session_write_close();
-                header('Location: index.php');
 
-                }else {
+               // $login= $_POST['login'];
+
+                // $pass = $_POST['mdp'];
+
+                $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_SPECIAL_CHARS);// permet de filter le login saisi (Methode, 'me nom dans le name', type de filtre (le filtre permet de justement filtrer ce que l'utilisateur ecris ))
+                $pass = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_SPECIAL_CHARS);
+                                    //solution pour controler 
+                // $stat_pers = $refPdo->prepare($name);//il envoi la requete sans la valeur (il prépare)
+                // $stat_pers = bindParam( ':login', $login );
+                // $stat_pers-> execute();
+                //retirer la $stat_pers = $refPdo ->query($name); 
+                // ajouter 
+                // $name = "SELECT * FROM user WHERE nom ='$login'";$name = "SELECT * FROM user WHERE nom =:login";
+
+                $name = "SELECT * FROM user WHERE nom = '$login'";
+
+                
+                $stat_pers = $refPdo ->query($name);
+                
+                
+                // var_dump($pers['psw']);
+                
+                if($stat_pers ->rowCount()==1 ){ //voir si lutilisateur existe dans la base de donnée
+                    $pers = $stat_pers->fetch(PDO::FETCH_ASSOC);//demandé le tbleau associatif
+
+                if($_POST['login']== $pers['login'] && $_POST['mdp'] ==$pers['psw'] ){
+
+                    $_SESSION['user'] = $login;
+                    session_write_close();
+
+                    header('Location: index.php');
+
+                }else{
                     echo '<H2 style = "color:red">salut '.$login.' veuillez saisir le bon mdp</h2>';
-                }
+
+                };
+                }else{
+                    echo 'utilisateur inconnu';
                 }
 
 
-            ?>  
+               
+
+                // if ($pass =='psw'){
+                // $_SESSION['user'] = $login;
+                // session_write_close();
+                // header('Location: index.php');
+
+                // }else {
+                //     echo '<H2 style = "color:red">salut '.$login.' veuillez saisir le bon mdp</h2>';
+                // }
+                }
+
+
+                ?>
 
             <form action="connect.php" method="post">
                 <label for="login">identifiez vous</label>
@@ -70,9 +113,3 @@
         ?>
     </body>
 </html>
-
-
-
-
-
-

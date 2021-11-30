@@ -26,7 +26,7 @@
                         
                         
                         <br><br>
-                        <span><a href="#" class="btn btn-secondary btn-sm">Créer un compte</a></span>
+                        <span><a href="creer.php" class="btn btn-secondary btn-sm">Créer un compte</a></span>
                         <br>
                         <span class="badge badge-secondary">DATE : 01-03-2013</span>
                         <?php session_start();
