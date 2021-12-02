@@ -1,6 +1,31 @@
 <?php
-    $page = 'login';
+session_start();
+$page = 'login';
+$erreur = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // conexion à la base
+    $dbConnect = new PDO('mysql:host=localhost;dbname=demo_personne;charset=utf8', 'root', '');
+
+    $login = $_POST['login'];
+
+    $sql = 'SELECT * FROM personne WHERE nom = \'' . $login . '\'';
+
+    $stat_pers = $dbConnect->query($sql);
+
+    //si login bon enregistrement en base
+    if ($stat_pers->rowCount() == 1) {
+        $pers = $stat_pers->fetch();
+        $_SESSION['user'] = $login;
+        header('Location: index.php');
+
+        exit();
+    }
+    $erreur = 'Erreur de login';
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +42,12 @@
     ?>
     <section>
         <h3>Identifiez vous</h3>
-        <form method="post" action="verif.php">
+        <form method="post" action="login.php">
+            <?php
+                if ($erreur != '') {
+                    echo '<h5>'.$erreur.'</h5>';
+                }
+            ?>
             <label>Votre login </label>
             <input type="text" name="login">
             <button type="submit">Valider</button>
