@@ -1,8 +1,6 @@
 <header>
-
     <h1>Vous êtes sur la page <?php echo $vue; ?></h1>
     <?php
-       
         if (isset($_SESSION['user'])) {
             echo '<h3>Bonjour '.$_SESSION['user'].'</h3>';
         }

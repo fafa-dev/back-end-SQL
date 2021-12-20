@@ -1,25 +1,35 @@
 <?php
-    $page = 'home';
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+session_start();
+$vue;
 
-<body>
-    <?php
-        include 'inc/entete.php';
-    ?>
-    <section>
-        <h3>Bienvenu dur notre site</h3>
-        <br>
-        <a href="login.php">Se connecter</a>
-    </section>
-</body>
+    if (empty($_GET)) {
+        $entite =''; //ce quon va mettre dans la barnav url
+        $action ='home';//ce quon va mettre dans la barnav url
+        
+    }else{
+        $entite =$_GET['entite'];// ce quon va trouver sur l'url
+        $action = $_GET['action']; 
+    }
 
-</html>
+    try{
+    switch ($entite) {
+        case 'article':
+            require 'controleurs/controleurArticle.php';
+            break;
+
+        case 'personne':
+            require 'controleurs/controleurPersonne.php'; //toutes les fonction correspondant a laction que l'on doit faire 
+            break;
+            
+        default:
+            $vue = 'home'; //nous avons enlever de lentete pour la mettre ici 
+            break;
+    }
+}catch(PDOException $err){
+    $vue ='erreur';
+
+
+}
+
+    include 'vues/template.php';
