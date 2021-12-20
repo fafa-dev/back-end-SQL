@@ -1,27 +1,18 @@
 <?php
 require 'base/dao.php';
 
-function login()
-{
+class modelPersonne{
 
-    global $vue;
-    global $erreur;
+    public function login()
+    {
 
-    //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $login = $_POST['login'];
 
-        $login = $_POST['login'];
+        
+                $dao = new Dao();
+                $personne = $dao->getPersonneByLogin($login);
 
-        try {
-            $personne = getPersonneByLogin($login);
-
-            $_SESSION['user'] = $personne['nom'];
-            $vue = 'home';
-        } catch (Exception $e) {
-            $erreur = $e->getMessage();
-            $vue = 'form_login';
-        }
-    // } else {
-
-    //     $vue = 'form_login';
-    // }
+                $_SESSION['user'] = $personne['nom'];
+                //$vue = 'home';
+    }
 }

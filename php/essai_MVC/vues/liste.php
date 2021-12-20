@@ -3,20 +3,20 @@
     <br>
     <table>
         <tr>
-        <th>photo</th>
+            <th>Photo</th>
             <th>Code article</th>
             <th>Libellé</th>
             <th>prix unitaire</th>
         </tr>
         <?php
 
-        foreach ($articles as $article) {
+        foreach ($articles as $article) {//une fois quon a modifier la DAO on modifier ici avec les getteur 
             //var_dump($article);
             echo '<tr>';
-            echo '<td> <img src="/upload/'.$article['photo'].'"</td>';
-            echo '<td>' . $article['id_art'] . '</td>';
-            echo '<td>' . $article['libelle_art'] . '</td>';
-            echo '<td>' . $article['prix_art'] . '</td>';
+            echo '<td><img src="/upload/'.$article->getnomimage().'"></td>';
+            echo '<td>' . $article->getId() . '</td>';
+            echo '<td>' . $article ->getlibelle() . '</td>';
+            echo '<td>' . $article->getprix() . '</td>';
             echo '</tr>';
         }
         ?>
